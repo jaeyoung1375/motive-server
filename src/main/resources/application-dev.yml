@@ -1,0 +1,32 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:p6spy:oracle:thin:@yggcv8zldawsd5fk_medium?TNS_ADMIN=/opt/oracle/wallet
+    username: dev
+    password: Jaeyeong1234
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+server:
+  port: 9090
+  address: 0.0.0.0
+
+decorator:
+  datasource:
+    p6spy:
+      enable: false
+
+logging:
+  level:
+    p6spy: INFO
+  file:
+    path: /home/ubuntu
+    name: app.log
+
+file:
+  upload:
+    path: /opt/app/upload
+    server: /upload
+
+app:
+  frontend-url: http://168.107.63.120:3000
