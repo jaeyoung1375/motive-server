@@ -5,7 +5,7 @@ plugins {
 	id 'jacoco'
 }
 
-group = 'kr.co.teamo'
+group = 'kr.co.motive'
 version = '0.0.1-SNAPSHOT'
 description = 'Demo project for Spring Boot'
 
@@ -60,7 +60,7 @@ jacoco {
 }
 
 def jacocoExcludes = [
-		'**/TeamoServerApplication*',
+		'**/MotiveServerApplication*',
 		'**/dto/**',
 		'**/configuration/**',
 		'**/common/response/**',

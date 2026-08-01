@@ -2,7 +2,7 @@ server:
   forward-headers-strategy: framework
 spring:
   application:
-    name: teamo-server
+    name: motive-server
   profiles:
     include:
     - secret
@@ -11,13 +11,13 @@ spring:
     redis:
       host: 146.56.116.158
       port: 6379
-  datasource:
-    hikari:
-      connection-init-sql: ALTER SESSION DISABLE PARALLEL DML
+#  datasource:
+#    hikari:
+#      connection-init-sql: ALTER SESSION DISABLE PARALLEL DML
 
 mybatis:
   mapper-locations: classpath:/mapper/**/*-mapper.xml
-  type-aliases-package: kr.co.teamo
+  type-aliases-package: kr.co.motive
   configuration:
     map-underscore-to-camel-case: true
     jdbc-type-for-null: VARCHAR  # Oracle에서 null 파라미터 바인딩 시 JdbcType.OTHER(1111) 오류 방지
