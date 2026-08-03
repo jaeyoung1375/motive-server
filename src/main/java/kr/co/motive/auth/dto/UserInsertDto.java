@@ -46,4 +46,10 @@ public class UserInsertDto {
     @Schema(description = "최근로그인일시")
     private LocalDateTime lastLoginDt;
 
+    @Schema(description = "성별")
+    private String gender;
+
+    @Schema(description = "생년월일")
+    private LocalDateTime birth;
+
 }

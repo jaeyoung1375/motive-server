@@ -51,6 +51,8 @@ public class AuthController {
                 .isNew(result.isNew())
                 .build();
 
+
+
         return ApiResponse.ok(responseDto);
 
     }

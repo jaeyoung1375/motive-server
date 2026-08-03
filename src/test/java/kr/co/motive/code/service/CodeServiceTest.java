@@ -1,8 +1,8 @@
-package kr.co.teamo.code.service;
+package kr.co.motive.code.service;
 
-import kr.co.teamo.code.dto.CodeRequestDto;
-import kr.co.teamo.code.dto.CodeResponseDto;
-import kr.co.teamo.code.mapper.CodeMapper;
+import kr.co.motive.code.dto.CodeRequestDto;
+import kr.co.motive.code.dto.CodeResponseDto;
+import kr.co.motive.code.mapper.CodeMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

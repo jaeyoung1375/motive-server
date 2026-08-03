@@ -43,4 +43,12 @@ public interface AuthMapper {
      * 최근 로그인 일시 갱신
      */
     void updateLastLoginDt(Long userId);
+
+    /**
+     * 닉네임, 성별, 생년월일 갱신 (운동프로필 등록 시 사용)
+     */
+    void updateProfileInfo(@Param("userId") Long userId,
+                           @Param("nickname") String nickname,
+                           @Param("gender") String gender,
+                           @Param("birth") String birth);
 }
