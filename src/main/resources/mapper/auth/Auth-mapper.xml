@@ -123,4 +123,12 @@
           , MOD_DT = SYSDATE
         WHERE USER_ID = #{userId, jdbcType=NUMERIC}
     </update>
+
+    <!-- 프로필 파일아이디 갱신 (운동프로필 등록/수정 시 이미지 첨부한 경우 사용) -->
+    <update id="updateProfileFileId">
+        UPDATE USERS
+        SET PROFILE_FILE_ID = #{profileFileId, jdbcType=NUMERIC}
+          , MOD_DT = SYSDATE
+        WHERE USER_ID = #{userId, jdbcType=NUMERIC}
+    </update>
 </mapper>

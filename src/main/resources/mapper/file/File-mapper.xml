@@ -8,7 +8,7 @@
 
     <insert id="insertFile" parameterType="FileDto">
     <selectKey keyProperty="fileId" resultType="long" order="BEFORE">
-   	 SELECT POST_SEQ.NEXTVAL FROM DUAL
+   	 SELECT CMM_FILE_SEQ.NEXTVAL FROM DUAL
 	</selectKey>
 
 	INSERT INTO CMM_FILE(

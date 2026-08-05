@@ -51,4 +51,10 @@ public interface AuthMapper {
                            @Param("nickname") String nickname,
                            @Param("gender") String gender,
                            @Param("birth") String birth);
+
+    /**
+     * 프로필 파일아이디 갱신 (운동프로필 등록/수정 시 이미지 첨부한 경우 사용)
+     */
+    void updateProfileFileId(@Param("userId") Long userId,
+                             @Param("profileFileId") Long profileFileId);
 }

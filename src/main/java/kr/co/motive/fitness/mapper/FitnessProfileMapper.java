@@ -22,7 +22,7 @@ public interface FitnessProfileMapper {
 	 * @param userId
 	 * @return
 	 */
-	int existsProfile(@Param("userId") Long userId);
+	boolean existsProfile(@Param("userId") Long userId);
 
 	/**
 	 * 운동프로필 등록

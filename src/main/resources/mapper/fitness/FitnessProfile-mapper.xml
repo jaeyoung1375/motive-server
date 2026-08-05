@@ -27,7 +27,7 @@
     </select>
 
     <!-- 운동프로필 존재 여부 조회 -->
-    <select id="existsProfile" resultType="int">
+    <select id="existsProfile" resultType="boolean">
       SELECT COUNT(*)
       FROM USER_FITNESS_PROFILE
       WHERE USER_ID = #{userId, jdbcType=NUMERIC}
