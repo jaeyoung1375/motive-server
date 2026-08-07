@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.co.motive.common.code.CommonErrorCode;
 import kr.co.motive.common.code.FileErrorCode;
 import kr.co.motive.common.exception.CustomException;
 import kr.co.motive.common.file.dto.FileDto;

@@ -13,7 +13,6 @@ import kr.co.motive.common.exception.CustomException;
 import kr.co.motive.common.response.ApiResponse;
 import kr.co.motive.common.util.SecurityUtil;
 import kr.co.motive.fitness.mapper.FitnessProfileMapper;
-import kr.co.motive.fitness.service.FitnessProfileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseCookie;
