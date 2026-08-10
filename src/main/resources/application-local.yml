@@ -4,8 +4,6 @@ spring:
       on-profile: local
   datasource:
     url: jdbc:p6spy:oracle:thin:@yggcv8zldawsd5fk_medium?TNS_ADMIN=C:/wallet
-    username: dev
-    password: Jaeyeong1234
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
   data:
     redis:
@@ -37,4 +35,5 @@ file:
     server: /upload
 app:
   frontend-url: http://localhost:3000
+  mobile-redirect-scheme: motive://oauth-callback
     

@@ -36,7 +36,9 @@ public enum UserErrorCode implements ResponseCode {
     /** 활성 상태인 회원만 수정 가능 **/
     USER_NOT_ACTIVE("U0012", HttpStatus.BAD_REQUEST, "활성 상태인 회원만 수정할 수 있습니다."),
     /** 인증이 필요합니다. */
-    UNAUTHORIZED("U0013", HttpStatus.UNAUTHORIZED, "인증이 필요합니다.");
+    UNAUTHORIZED("U0013", HttpStatus.UNAUTHORIZED, "인증이 필요합니다."),
+    /** 유효하지 않거나 만료된 모바일 로그인 교환 코드입니다. */
+    INVALID_EXCHANGE_CODE("U0014", HttpStatus.UNAUTHORIZED, "유효하지 않거나 만료된 인증 코드입니다.");
 
 
 	/** 코드 */

@@ -2,6 +2,7 @@ package kr.co.motive.auth;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import kr.co.motive.auth.dto.KakaoUserResponse;
 import kr.co.motive.auth.dto.SocialAccount;
 import kr.co.motive.auth.dto.UserResponseDto;
@@ -10,6 +11,7 @@ import kr.co.motive.auth.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -20,6 +22,7 @@ import tools.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.UUID;
 
 
 @Component
@@ -29,8 +32,13 @@ public class SocialOauth2SuccessHandler implements AuthenticationSuccessHandler 
 
     private final AuthService authService;
 
+    private final StringRedisTemplate redisTemplate;
+
     @Value("${app.frontend-url}")
     private String frontendUrl;
+
+    @Value("${app.mobile-redirect-scheme}")
+    private String mobileRedirectScheme;
 
     @Value("${jwt.refresh-exp-ms}")
     private long refreshExpMs;
@@ -70,6 +78,22 @@ public class SocialOauth2SuccessHandler implements AuthenticationSuccessHandler 
                 .build();
 
         UserResponseDto result = authService.socialLogin(socialAccount, name, email);
+
+        HttpSession session = request.getSession(false);
+        boolean isMobile = session != null
+                && Boolean.TRUE.equals(session.getAttribute(MobileAwareOAuth2AuthorizationRequestResolver.MOBILE_SESSION_ATTR));
+        if (session != null) {
+            session.removeAttribute(MobileAwareOAuth2AuthorizationRequestResolver.MOBILE_SESSION_ATTR);
+        }
+
+        if (isMobile) {
+            String code = UUID.randomUUID().toString();
+            // accessToken/refreshToken(JWT)엔 '|' 문자가 나오지 않으므로 구분자로 사용
+            String payload = result.getAccessToken() + "|" + result.getRefreshToken() + "|" + result.isNew();
+            redisTemplate.opsForValue().set("oauth:exchange:" + code, payload, Duration.ofSeconds(60));
+            response.sendRedirect(mobileRedirectScheme + "?code=" + code);
+            return;
+        }
 
         ResponseCookie refreshCookie = ResponseCookie.from("refreshToken", result.getRefreshToken())
                 .httpOnly(true) // JS에서 document.cookie로 못 읽음 (XSS 방어)

@@ -1,5 +1,6 @@
 package kr.co.motive.configuration;
 
+import kr.co.motive.auth.MobileAwareOAuth2AuthorizationRequestResolver;
 import kr.co.motive.auth.SocialOauth2SuccessHandler;
 import kr.co.motive.auth.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
@@ -39,13 +40,22 @@ public class SecurityConfig {
                 .oauth2Login(oauth -> oauth
                         .authorizationEndpoint(auth -> auth
                                 .authorizationRequestResolver(
-                                        authorizationRequestResolver(clientRegistrationRepository)
+                                        mobileAwareAuthorizationRequestResolver(clientRegistrationRepository)
                                 )
                         )
                         .successHandler(socialOauth2SuccessHandler)
                 );
 
         return http.build();
+    }
+
+    /**
+     * 모바일 앱(?platform=mobile) 요청을 세션에 마킹해서 SocialOauth2SuccessHandler가 리다이렉트 방식을 분기하게 한다.
+     */
+    @Bean
+    public OAuth2AuthorizationRequestResolver mobileAwareAuthorizationRequestResolver(
+            ClientRegistrationRepository repo) {
+        return new MobileAwareOAuth2AuthorizationRequestResolver(authorizationRequestResolver(repo));
     }
 
     /**

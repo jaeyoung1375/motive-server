@@ -116,5 +116,27 @@ public class AuthService {
         return authMapper.findUser(userId);
     }
 
+    public UserResponseDto exchangeCode(String code){
+        String key = "oauth:exchange:" + code;
+        String stored = redisTemplate.opsForValue().get(key);
+
+        if(stored == null){
+            throw new CustomException(UserErrorCode.INVALID_EXCHANGE_CODE);
+        }
+
+        redisTemplate.delete(key); // 1회용
+
+        String[] parts = stored.split("\\|", 3);
+        if(parts.length != 3){
+            throw new CustomException(UserErrorCode.INVALID_EXCHANGE_CODE);
+        }
+
+        return UserResponseDto.builder()
+                .accessToken(parts[0])
+                .refreshToken(parts[1])
+                .isNew(Boolean.parseBoolean(parts[2]))
+                .build();
+    }
+
 
 }
