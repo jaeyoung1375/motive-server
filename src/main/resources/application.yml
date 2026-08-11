@@ -9,7 +9,7 @@ spring:
     active: local
   data:
     redis:
-      host: 146.56.116.158
+      host: localhost
       port: 6379
 #  datasource:
 #    hikari:

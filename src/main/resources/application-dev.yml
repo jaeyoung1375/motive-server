@@ -18,12 +18,12 @@ logging:
   level:
     p6spy: INFO
   file:
-    path: /home/ubuntu
+    path: /logs
     name: app.log
 
 file:
   upload:
-    path: /opt/app/upload
+    path: /app/upload
     server: /upload
 
 app:
