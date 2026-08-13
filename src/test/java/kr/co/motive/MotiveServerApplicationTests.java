@@ -1,4 +1,4 @@
-package kr.co.teamo;
+package kr.co.motive;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,7 +11,7 @@ import javax.sql.DataSource;
         "spring.autoconfigure.exclude=org.springframework.boot.data.jdbc.autoconfigure.DataJdbcRepositoriesAutoConfiguration," +
         "org.springframework.boot.data.redis.autoconfigure.DataRedisReactiveAutoConfiguration"
 })
-class teamoServerApplicationTests {
+class MotiveServerApplicationTests {
 
     @MockitoBean
     DataSource dataSource;
