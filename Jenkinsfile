@@ -13,6 +13,15 @@ pipeline {
             }
         }
 
+        stage('Prepare Secrets') {
+            steps {
+                withCredentials([file(credentialsId: 'motive-application-secret', variable: 'SECRET_FILE')]) {
+                    sh 'cp $SECRET_FILE src/main/resources/application-secret.yml'
+                }
+            }
+        }
+
+
         stage('Build') {
             steps {
                 sh 'chmod +x gradlew'
