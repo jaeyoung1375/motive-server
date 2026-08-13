@@ -16,7 +16,10 @@ pipeline {
         stage('Prepare Secrets') {
             steps {
                 withCredentials([file(credentialsId: 'motive-application-secret', variable: 'SECRET_FILE')]) {
-                    sh 'cp $SECRET_FILE src/main/resources/application-secret.yml'
+                    sh '''
+                           rm -f src/main/resources/application-secret.yml
+                           cp $SECRET_FILE src/main/resources/application-secret.yml
+                       '''
                 }
             }
         }
