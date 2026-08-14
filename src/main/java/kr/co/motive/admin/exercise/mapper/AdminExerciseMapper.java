@@ -14,9 +14,13 @@ public interface AdminExerciseMapper {
 
 	/**
 	 * 운동 목록 조회
+	 * @param bodyPartCd 부위코드
+	 * @param equipmentCd 기구코드
+	 * @param name 운동명
 	 * @return
 	 */
-	List<ExerciseResponseDto> getExerciseList();
+	List<ExerciseResponseDto> getExerciseList(@Param("bodyPartCd") String bodyPartCd,
+			@Param("equipmentCd") String equipmentCd, @Param("name") String name);
 
 	/**
 	 * 운동 상세 조회

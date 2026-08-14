@@ -4,9 +4,12 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+
 import kr.co.motive.admin.exercise.mapper.AdminExerciseMapper;
 import kr.co.motive.common.code.ExerciseErrorCode;
 import kr.co.motive.common.exception.CustomException;
+import kr.co.motive.common.util.PageResponseDto;
 import kr.co.motive.exercise.dto.ExerciseInsertDto;
 import kr.co.motive.exercise.dto.ExerciseResponseDto;
 import kr.co.motive.exercise.dto.ExerciseUpdateDto;
@@ -22,11 +25,19 @@ public class AdminExerciseService {
 
 	/**
 	 * 운동 목록 조회
+	 * @param bodyPartCd 부위코드
+	 * @param equipmentCd 기구코드
+	 * @param name 운동명
+	 * @param pageNum 페이지 번호 (1-based)
+	 * @param pageSize 페이지 크기
 	 * @return
 	 */
-	public List<ExerciseResponseDto> getExerciseList() {
+	public PageResponseDto<ExerciseResponseDto> getExerciseList(String bodyPartCd, String equipmentCd, String name,
+			int pageNum, int pageSize) {
 
-		return adminExerciseMapper.getExerciseList();
+		PageHelper.startPage(pageNum, pageSize);
+		List<ExerciseResponseDto> list = adminExerciseMapper.getExerciseList(bodyPartCd, equipmentCd, name);
+		return PageResponseDto.of(list);
 	}
 
 	/**

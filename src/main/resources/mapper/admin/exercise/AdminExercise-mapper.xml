@@ -19,6 +19,17 @@
              , REG_DT       /* 등록일시 */
              , MOD_DT       /* 변경일시 */
         FROM EXERCISES E
+        <where>
+            <if test="bodyPartCd != null and bodyPartCd != ''">
+                AND E.BODY_PART_CD = #{bodyPartCd}
+            </if>
+            <if test="equipmentCd != null and equipmentCd != ''">
+                AND E.EQUIPMENT_CD = #{equipmentCd}
+            </if>
+            <if test="name != null and name != ''">
+                AND E.NAME LIKE '%' || #{name} || '%'
+            </if>
+        </where>
         ORDER BY EXERCISE_ID DESC
 
     </select>

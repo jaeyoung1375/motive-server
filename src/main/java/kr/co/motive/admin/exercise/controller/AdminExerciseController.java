@@ -1,13 +1,12 @@
 package kr.co.motive.admin.exercise.controller;
 
-import java.util.List;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import kr.co.motive.admin.exercise.service.AdminExerciseService;
 import kr.co.motive.common.response.ApiResponse;
+import kr.co.motive.common.util.PageResponseDto;
 import kr.co.motive.exercise.dto.ExerciseInsertDto;
 import kr.co.motive.exercise.dto.ExerciseResponseDto;
 import kr.co.motive.exercise.dto.ExerciseUpdateDto;
@@ -31,9 +31,14 @@ public class AdminExerciseController {
 
 	@Operation(summary = "운동 목록 조회", description = "관리자용 운동 목록을 조회한다")
 	@GetMapping("/admin/exercises")
-	public ApiResponse<List<ExerciseResponseDto>> getExerciseList() {
+	public ApiResponse<PageResponseDto<ExerciseResponseDto>> getExerciseList(
+			@RequestParam(required = false) String bodyPartCd,
+			@RequestParam(required = false) String equipmentCd,
+			@RequestParam(required = false) String name,
+			@RequestParam(defaultValue = "1") int pageNum,
+			@RequestParam(defaultValue = "15") int pageSize) {
 
-		return ApiResponse.ok(adminExerciseService.getExerciseList());
+		return ApiResponse.ok(adminExerciseService.getExerciseList(bodyPartCd, equipmentCd, name, pageNum, pageSize));
 	}
 
 	@Operation(summary = "운동 상세 조회", description = "관리자용 운동 상세를 조회한다")
