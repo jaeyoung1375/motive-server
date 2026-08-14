@@ -45,7 +45,8 @@
                  WHEN '02' THEN 1 WHEN '06' THEN 1
                  WHEN '01' THEN 2 WHEN '05' THEN 2
                  WHEN '04' THEN 3 WHEN '07' THEN 3
-                 WHEN '03' THEN 4
+                 WHEN '05' THEN 4 WHEN '06' THEN 4
+                 WHEN '03' THEN 5
                END) = #{groupNo, jdbcType=NUMERIC}
         ORDER BY DBMS_RANDOM.VALUE
       ) T
