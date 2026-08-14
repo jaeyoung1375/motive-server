@@ -116,6 +116,14 @@ public class AuthController {
         return ApiResponse.ok(responseDto);
     }
 
+    @PostMapping("/logout")
+    public ApiResponse<Void> logout(){
+        Long userId = SecurityUtil.getUserId();
+        authService.logout(userId);
+
+        return ApiResponse.ok();
+    }
+
     @GetMapping("/me")
     public ApiResponse<UserProfileDto> getMe(HttpServletRequest request){
 

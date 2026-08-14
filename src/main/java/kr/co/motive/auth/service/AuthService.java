@@ -116,6 +116,10 @@ public class AuthService {
         return authMapper.findUser(userId);
     }
 
+    public void logout(Long userId){
+        redisTemplate.delete("refresh:" + userId);
+    }
+
     public UserResponseDto exchangeCode(String code){
         String key = "oauth:exchange:" + code;
         String stored = redisTemplate.opsForValue().get(key);
