@@ -42,4 +42,7 @@ public class WorkoutRecordResponseDto {
 	@Schema(description = "운동 목록")
 	private List<WorkoutRecordExerciseResponseDto> exercises;
 
+	@Schema(description = "부위명 목록(쉼표 구분, 중복 제거) — 목록 조회에서만 채워짐")
+	private String bodyPartNms;
+
 }
