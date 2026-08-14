@@ -16,7 +16,8 @@ public class RecommendedExerciseService {
 
 	public List<RecommendedExerciseResponseDto> getRandomRecommendedExercises(int count) {
 
-		return recommendedExerciseMapper.getRandomRecommendedExercises(count);
+		int groupNo = recommendedExerciseMapper.pickRandomGroup();
+		return recommendedExerciseMapper.getRandomRecommendedExercisesByGroup(groupNo, count);
 	}
 
 }
