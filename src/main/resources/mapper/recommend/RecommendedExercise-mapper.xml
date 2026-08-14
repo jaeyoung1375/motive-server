@@ -13,7 +13,7 @@
       넘기면 이 문제 자체가 생기지 않는다.
     -->
     <select id="pickRandomGroup" resultType="int">
-      SELECT TRUNC(DBMS_RANDOM.VALUE(1, 5)) FROM DUAL
+      SELECT TRUNC(DBMS_RANDOM.VALUE(1, 6)) FROM DUAL
     </select>
 
     <!--
