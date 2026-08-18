@@ -3,6 +3,8 @@ package kr.co.motive.auth;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import kr.co.motive.auth.dto.GithubUserResponse;
+import kr.co.motive.auth.dto.GoogleUserResponse;
 import kr.co.motive.auth.dto.KakaoUserResponse;
 import kr.co.motive.auth.dto.SocialAccount;
 import kr.co.motive.auth.dto.UserResponseDto;
@@ -67,8 +69,18 @@ public class SocialOauth2SuccessHandler implements AuthenticationSuccessHandler 
                 name = kakaoUser.getKakaoAccount().getProfile().getNickname();
 
             }
-            case GOOGLE -> {}
-            case GITHUB -> {}
+            case GOOGLE -> {
+                GoogleUserResponse googleUser = new ObjectMapper().convertValue(user.getAttributes(), GoogleUserResponse.class);
+                providerUserId = googleUser.getSub();
+                email = googleUser.getEmail();
+                name = googleUser.getName();
+            }
+            case GITHUB -> {
+                GithubUserResponse githubUser = new ObjectMapper().convertValue(user.getAttributes(), GithubUserResponse.class);
+                providerUserId = githubUser.getId().toString();
+                email = githubUser.getEmail();
+                name = githubUser.getName() != null ? githubUser.getName() : githubUser.getLogin();
+            }
         }
 
         SocialAccount socialAccount = SocialAccount

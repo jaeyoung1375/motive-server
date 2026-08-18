@@ -1,5 +1,6 @@
 package kr.co.motive.configuration;
 
+import kr.co.motive.auth.GithubEmailOAuth2UserService;
 import kr.co.motive.auth.MobileAwareOAuth2AuthorizationRequestResolver;
 import kr.co.motive.auth.SocialOauth2SuccessHandler;
 import kr.co.motive.auth.filter.JwtAuthenticationFilter;
@@ -23,6 +24,7 @@ public class SecurityConfig {
 
     private final CorsConfig corsConfig;
     private final SocialOauth2SuccessHandler socialOauth2SuccessHandler;
+    private final GithubEmailOAuth2UserService githubEmailOAuth2UserService;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http,
@@ -44,6 +46,7 @@ public class SecurityConfig {
                                 )
                         )
                         .successHandler(socialOauth2SuccessHandler)
+                        .userInfoEndpoint(userInfo -> userInfo.userService(githubEmailOAuth2UserService))
                 );
 
         return http.build();
